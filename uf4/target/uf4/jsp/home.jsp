@@ -29,7 +29,7 @@
                 <p> Fecha: </p>
                 <%= p.getDate()%>
 	        <%}%>
+                    <a href="mailto:<%=p.getUsuario().getEmail()%>"/>
     </body>
 </html>
 
-<a href="mailto:<%=p.getUsuario().getEmail()%>"

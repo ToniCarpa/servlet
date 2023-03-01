@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%
-    String id = (String) request.getAttribute("id");
-    %>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Login</title>
 </head>
