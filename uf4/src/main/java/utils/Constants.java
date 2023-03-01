@@ -27,7 +27,7 @@ public class Constants {
 
     // USUARIO
     public static final String SQL_INSERT_USER =
-            "INSERT INTO usuario (email, password, name) VALUES (?,?,?)";
+            "INSERT INTO usuario (name, password, email, linkdin, gitlab) VALUES (?,?,?,?,?)";
     public static final String SQL_DELETE_USER =
             "DELETE usuario WHERE id = ?";
     public static final String SQL_UPDATE_USER =

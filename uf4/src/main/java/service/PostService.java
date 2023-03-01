@@ -7,6 +7,7 @@ import model.Usuario;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class PostService {
     private Dao dao;
@@ -40,7 +41,22 @@ public class PostService {
                 status = false;
             }
         }
+        return status;
+    }
+
+    public boolean newUser(String name, String pass, String mail, String link, String git) throws SQLException {
+        ArrayList<Usuario> usuList = dao.allUsuariosList();
+        boolean status = false;
+        for (Usuario u : usuList) {
+            if (u.getName().equals(name)) {
+                System.out.println("Escoje otro nombre");
+                status = false;
+            } else {
+                usuList.add(new Usuario(UUID.randomUUID(), name, pass, mail, link, git));
+                status = true;
+            }
             return status;
+        }
     }
 
     public ArrayList<Post> postList() throws SQLException {
