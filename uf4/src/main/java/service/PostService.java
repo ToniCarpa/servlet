@@ -20,6 +20,7 @@ public class PostService {
         jdbc = new Jdbc();
         this.postService = postService.getInstance();
     }
+
     public static PostService getInstance() {
         if (postService == null)
             postService = new PostService();
@@ -27,15 +28,19 @@ public class PostService {
     }
 
 
+    public boolean checkUser(String pass, String mail) throws SQLException {
+        ArrayList<Usuario> listUsuarios = dao.allUsuariosList();
+        boolean status = false;
 
-    public ArrayList<String> checkUser(int id) throws SQLException {
-        Usuario u = dao.getUsuarioById(id);
-        ArrayList<String> t = new ArrayList<>(2);
-        for(String s : t){
-            t.add(0, u.getEmail());
-            t.add(1, u.getPassword());
+        for (Usuario o : listUsuarios) {
+            if (o.getEmail().equals(mail) && (o.getPassword().equals(pass))) {
+                status = true;
+            } else {
+                listUsuarios.add(new Usuario(pass, mail));
+                status = false;
             }
-        return t;
+        }
+            return status;
     }
 
     public ArrayList<Post> postList() throws SQLException {
@@ -48,7 +53,7 @@ public class PostService {
 
 
     public ArrayList<Post> getPostsOrdered() throws SQLException {
-        ArrayList<Post> postList =  dao.allPostList();
+        ArrayList<Post> postList = dao.allPostList();
         ArrayList<Post> postReturn = new ArrayList<Post>();
         for (Post p : postList) {
             //ORDENAR ARRAY date inverso

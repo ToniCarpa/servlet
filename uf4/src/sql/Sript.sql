@@ -15,7 +15,7 @@ CREATE TABLE `post` (
   CONSTRAINT `fk_post_usuari` FOREIGN KEY (`id_usuari`) REFERENCES `usuari` (`id`)
 );
 
-CREATE TABLE `usuari` (
+CREATE TABLE `usuario` (
   `id` int NOT NULL AUTO_INCREMENT,
   `usuari` varchar(100) DEFAULT NULL,
   `password` varchar(100) DEFAULT NULL,
@@ -26,4 +26,4 @@ CREATE TABLE `usuari` (
   UNIQUE KEY `usuari` (`usuari`)
 );
 
-insert into jugador values (1,'nomPrueba', 'tituloPrueba','http://google.com','Esto es una prueba','null');
+insert into usuario values (1,'nomPrueba', 'tituloPrueba','http://google.com','Esto es una prueba','null');

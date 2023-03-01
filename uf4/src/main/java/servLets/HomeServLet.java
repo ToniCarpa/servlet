@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-@WebServlet(name = "HomeServLet", urlPatterns = "/HomeSerLet.do")
+@WebServlet(name = "HomeServLet", urlPatterns = "/jsp/HomeServLet.do")
 public class HomeServLet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

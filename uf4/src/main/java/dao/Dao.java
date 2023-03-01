@@ -65,6 +65,21 @@ public class Dao {
         return u;
     }
 
+    public Usuario getUsuarioByMailPass(String mail, String pass) throws SQLException {
+        Usuario u = null;
+
+        try (PreparedStatement ps = jdbc.conn.prepareStatement(Constants.SQL_SELECT_USERBYID)) {
+            ps.setString(1, mail);
+            ps.setString(2, pass);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    u = new Usuario(rs.getInt("id"), rs.getString("name"), rs.getString("password"), rs.getString("email"), rs.getString("linkdin"), rs.getString("gitlad"));
+                }
+            }
+        }
+        return u;
+    }
+
     // SELECT ALLUSERS
     public ArrayList<Usuario> allUsuariosList() throws SQLException {
         ArrayList<Usuario> listUsuarios = new ArrayList<>();

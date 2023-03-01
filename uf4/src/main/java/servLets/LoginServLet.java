@@ -23,23 +23,21 @@ public class LoginServLet extends HttpServlet {
     public LoginServLet() {
         super();
     }
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("LoginServlet");
         RequestDispatcher view = getServletContext().getRequestDispatcher("/index.jsp");
-        view.forward(request,response);
+        view.forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String password = request.getParameter("pass");
         String email = request.getParameter("mail");
-        int id = Integer.parseInt(request.getParameter("id"));
+        //int id = Integer.parseInt(request.getParameter("id"));
 
         try {
-            ArrayList<String> t = PostService.getInstance().checkUser(id);
-            if (password.equals(t.get(1)) && email.equals(t.get(0))) {
+            if (PostService.getInstance().checkUser(email, password)) {
                 getServletContext().getRequestDispatcher("jsp/home.jsp").forward(request, response);
-                //response.sendRedirect( "/home.jsp" );
-            } else{
+            } else {
                 getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
             }
         } catch (SQLException e) {
