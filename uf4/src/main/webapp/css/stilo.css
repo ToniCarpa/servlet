@@ -1,0 +1,33 @@
+body {
+    background-color: white;
+    color: black;
+}
+
+h2, h4, .value_center {
+    text-align: center;
+}
+
+form {
+    text-align: center;
+}
+
+div {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+textarea {
+    height: 200;
+}
+
+.titulo {
+    padding: 2px;
+    width: 600;
+}
+
+.buttons_center {
+    display: inline-block;
+}
+
+
+}
