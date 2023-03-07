@@ -1,5 +1,7 @@
 package servLets;
 
+import model.Post;
+import model.Usuario;
 import service.PostService;
 
 import javax.servlet.ServletException;
@@ -9,14 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
-@WebServlet(name="RegistroServLet", urlPatterns = "/RegistroServLet.do")
+@WebServlet(name = "RegistroServLet", urlPatterns = "/RegistroServLet.do")
 public class RegistroServLet extends HttpServlet {
-    private PostService postService;
 
     public RegistroServLet() {
         super();
-        this.postService = postService;
     }
 
     @Override
@@ -28,13 +29,14 @@ public class RegistroServLet extends HttpServlet {
         String linkdn = req.getParameter("link");
         String git = req.getParameter("git");
         try {
-            if(postService.newUser(name, pass, email,linkdn,git)){
-                getServletContext().getRequestDispatcher("/jsp/home.jsp").forward(req, resp);
-            }else{
-                getServletContext().getRequestDispatcher("/jsp/regsitro.jsp").forward(req, resp);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Usuario u = PostService.getInstance().newUser(name, pass, email, linkdn, git);
+            ArrayList<Post> listPostUsuario = PostService.getInstance().listPostUsusario(u);
+            req.setAttribute("usuario", u);
+            req.setAttribute("listPostUsuario", listPostUsuario);
+            // System.out.println("bienvenido" + name);
+            getServletContext().getRequestDispatcher("/jsp/home.jsp").forward(req, resp);
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
         }
     }
 }

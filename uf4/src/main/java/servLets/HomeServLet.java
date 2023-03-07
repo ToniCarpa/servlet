@@ -23,14 +23,6 @@ public class HomeServLet extends HttpServlet {
         super();
         postService = new PostService();
     }
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            request.setAttribute("posts", PostService.getInstance().postList());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        getServletContext().getRequestDispatcher("/jsp/home.jsp").forward(request, response);
-    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArrayList<Post> postList = null;

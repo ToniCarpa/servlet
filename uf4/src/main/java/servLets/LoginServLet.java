@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.UUID;
 
 
 @WebServlet(name = "LoginServLet", urlPatterns = "/LoginServLet.do")
@@ -32,13 +33,19 @@ public class LoginServLet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String password = request.getParameter("pass");
         String email = request.getParameter("mail");
-        //int id = Integer.parseInt(request.getParameter("id"));
+        UUID id = UUID.fromString(request.getParameter("id"));
 
         try {
             if (PostService.getInstance().checkUser(email, password)) {
-                getServletContext().getRequestDispatcher("jsp/home.jsp").forward(request, response);
+                request.setAttribute("id", id);
+
+                Usuario u = PostService.getInstance().usuarioId(id);
+                request.setAttribute("usuario", u);
+
+                RequestDispatcher view = getServletContext().getRequestDispatcher("/jsp/home.jsp");
+                view.forward(request, response);
             } else {
-                getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher("/registro.jsp").forward(request, response);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

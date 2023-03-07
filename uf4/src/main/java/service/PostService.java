@@ -37,34 +37,41 @@ public class PostService {
             if (o.getEmail().equals(mail) && (o.getPassword().equals(pass))) {
                 status = true;
             } else {
-                listUsuarios.add(new Usuario(pass, mail));
+                System.out.println("Usuario no encontrado, registrate");
                 status = false;
             }
         }
         return status;
     }
 
-    public boolean newUser(String name, String pass, String mail, String link, String git) throws SQLException {
+    public Usuario newUser(String name, String pass, String mail, String link, String git) throws SQLException {
+    Usuario t = null;
         ArrayList<Usuario> usuList = dao.allUsuariosList();
-        boolean status = false;
         for (Usuario u : usuList) {
             if (u.getName().equals(name)) {
                 System.out.println("Escoje otro nombre");
-                status = false;
             } else {
-                usuList.add(new Usuario(UUID.randomUUID(), name, pass, mail, link, git));
-                status = true;
+                t = dao.insertUsuario(new Usuario(UUID.randomUUID(), name, pass, mail, link, git));
+                usuList.add(t); //new Usuario(UUID.randomUUID(), name, pass, mail, link, git));
             }
-            return status;
         }
+        return t;
     }
+
 
     public ArrayList<Post> postList() throws SQLException {
         return dao.allPostList();
     }
+    public ArrayList<Post> listPostUsusario(Usuario u) throws  SQLException {
+        return dao.allPostUserList(u);
+    }
 
     public ArrayList<Usuario> usuariosList() throws SQLException {
         return dao.allUsuariosList();
+    }
+
+    public Usuario usuarioId(UUID id) throws SQLException{
+        return dao.getUsuarioById(id);
     }
 
 

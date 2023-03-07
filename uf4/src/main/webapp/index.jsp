@@ -13,6 +13,9 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
           rel="stylesheet" type="text/css"/>
     <link href="css/styles.css" rel="stylesheet"/>
+
+
+
 </head>
 <section class="vh-100 gradient-custom">
     <div class="container py-5 h-100">
@@ -26,7 +29,7 @@
                             <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
                             <p class="text-white-50 mb-5">Introduce tu email & password!</p>
 
-                            <form action="/LoginServLet.do" method="get">
+                            <form action="/LoginServLet.do" method="post">
                                 <div class="form-outline form-white mb-4">
                                     <input type="text" name="mail" class="form-control form-control-lg"/>
                                     <label class="form-label">Email</label>
@@ -43,7 +46,7 @@
                                     password?</a></p>
                             </form>
 
-                            <form action="/jsp/HomeServLet.do" method="post">
+                            <form action="/HomeServLet.do" method="post">
                                 <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
                             </form>
 

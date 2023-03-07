@@ -24,7 +24,7 @@ public class Dao {
 
 
     // INSERT USER
-    public void insertUsuario(Usuario usuario) throws SQLException {
+    public Usuario insertUsuario(Usuario usuario) throws SQLException {
         try (PreparedStatement ps = jdbc.conn.prepareStatement(Constants.SQL_INSERT_USER)) {
             ps.setString(1, usuario.getName());
             ps.setString(2, usuario.getPassword());
@@ -33,6 +33,7 @@ public class Dao {
             ps.setString(5, usuario.getGitlab());
             ps.execute();
         }
+        return usuario;
     }
 
     // DELETE USER
@@ -54,11 +55,11 @@ public class Dao {
     }
 
     // SELECT USUER BY ID
-    public Usuario getUsuarioById(int id) throws SQLException {
+    public Usuario getUsuarioById(UUID id) throws SQLException {
         Usuario u = null;
 
         try (PreparedStatement ps = jdbc.conn.prepareStatement(Constants.SQL_SELECT_USERBYID)) {
-            ps.setInt(1, id);
+            ps.setString(1, String.valueOf(id));
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     u = new Usuario(UUID.fromString(rs.getString("id")), rs.getString("name"), rs.getString("password"), rs.getString("email"), rs.getString("linkdin"), rs.getString("gitlad"));
@@ -68,6 +69,7 @@ public class Dao {
         return u;
     }
 
+    // SELECT USUER BY MAIL & PASWD
     public Usuario getUsuarioByMailPass(String mail, String pass) throws SQLException {
         Usuario u = null;
 
@@ -108,7 +110,7 @@ public class Dao {
     public Post creaPost(String tit, String url, String mnsage, String date){
         ArrayList<Post> listUserPosts = new ArrayList<>();
 //        try (PreparedStatement pre = jdbc.conn.prepareStatement(Constants.SQL_SELECT_USER_POSTS)) {
-
+return null;
         }
 
     // SELECT ALLPOST USER
