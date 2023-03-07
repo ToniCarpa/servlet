@@ -4,6 +4,7 @@ import dao.Dao;
 import model.Post;
 import service.PostService;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,6 +23,10 @@ public class HomeServLet extends HttpServlet {
     public HomeServLet() {
         super();
         postService = new PostService();
+    }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher view = getServletContext().getRequestDispatcher("/jsp/home.jsp");
+        view.forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

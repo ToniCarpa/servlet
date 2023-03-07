@@ -13,6 +13,9 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
           rel="stylesheet" type="text/css"/>
     <link href="css/styles.css" rel="stylesheet"/>
+
+
+
 </head>
 <section class="vh-100 gradient-custom">
     <div class="container py-5 h-100">
@@ -56,7 +59,7 @@
 
                         <div>
                             <p class="mb-0"> No eres usuario registrado?</p>
-                            <form action="/RegistroServLet.do" method="post">
+                            <form action="/RegistroServLet.do" method="get">
                                 <button class="btn btn-outline-light btn-lg px-5" type="submit">Registrate!</button>
                             </form>
                         </div>

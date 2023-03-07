@@ -1,3 +1,5 @@
+<%@ page import="model.Post" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +15,11 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
           rel="stylesheet" type="text/css"/>
     <link href="css/styles.css" rel="stylesheet"/>
+
+    <%
+        ArrayList<Post> postArrayList = (ArrayList<Post>) request.getAttribute("listPostUsuario");
+    %>
+
 </head>
 <section class="vh-100 gradient-custom">
     <div class="container py-5 h-100">
@@ -22,39 +29,36 @@
                     <div class="card-body p-5 text-center">
 
                         <div class="mb-md-5 mt-md-4 pb-5">
-
                             <h2 class="fw-bold mb-2 text-uppercase">Home</h2>
 
-                            <form action="/HomeServLet.do" method="post">
-                                <div class="form-outline form-white mb-4">
-                                    <input type="text" name="name" class="form-control form-control-lg"/>
-                                    <label class="form-label">Usuario: </label>
-                                </div>
+                            <%for (Post p : postArrayList) { %>
+                                <form action="/HomeServLet.do" method="post">
+                                    <div class="form-outline form-white mb-4">
+                                        <input type="text" name="name" class="form-control form-control-lg"/>
+                                        <label class="form-label">Usuario: <%=p.getUsuario()%> </label>
+                                    </div>
 
-                                <div class="form-outline form-white mb-4">
-                                    <input type="text" name="titulo" class="form-control form-control-lg"/>
-                                    <label class="form-label">Titulo: </label>
-                                </div>
+                                    <div class="form-outline form-white mb-4">
+                                        <input type="text" name="titulo" <%=p.getTitulo()%> class="form-control form-control-lg"/>
+                                        <label class="form-label">Titulo: <%=p.getTitulo()%> </label>
+                                    </div>
 
-                                <div class="form-outline form-white mb-4">
-                                    <input type="text" name="url" class="form-control form-control-lg"/>
-                                    <label class="form-label">Url: </label>
-                                </div>
+                                    <div class="form-outline form-white mb-4">
+                                        <input type="text" name="url" class="form-control form-control-lg"/>
+                                        <label class="form-label">Url: <%=p.getUrl()%> </label>
+                                    </div>
 
-                                <div class="form-outline form-white mb-4">
-                                    <input type="textarea" name="msg" class="form-control form-control-lg"/>
-                                    <label class="form-label">Mensaje: </label>
-                                </div>
+                                    <div class="form-outline form-white mb-4">
+                                        <input type="textarea" name="msg" class="form-control form-control-lg"/>
+                                        <label class="form-label">Mensaje: <%=p.getMessage()%> </label>
+                                    </div>
 
-                                <div class="form-outline form-white mb-4">
-                                    <input type="text" name="date" class="form-control form-control-lg"/>
-                                    <label class="form-label">Fecha: </label>
-                                </div>
-                            </form>
-
-
-
-
+                                    <div class="form-outline form-white mb-4">
+                                        <input type="text" name="date" class="form-control form-control-lg"/>
+                                        <label class="form-label">Fecha: <%=p.getDate()%> </label>
+                                    </div>
+                                </form>
+                            <%}%>
 
                         </div>
 

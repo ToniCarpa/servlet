@@ -59,7 +59,7 @@
 
                         <div>
                             <p class="mb-0"> No eres usuario registrado?</p>
-                            <form action="/RegistroServLet.do" method="post">
+                            <form action="/RegistroServLet.do" method="get">
                                 <button class="btn btn-outline-light btn-lg px-5" type="submit">Registrate!</button>
                             </form>
                         </div>
