@@ -29,7 +29,7 @@
                             <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
                             <p class="text-white-50 mb-5">Introduce tu email & password!</p>
 
-                            <form action="/LoginServLet.do" method="post">
+                            <form action="LoginServLet.do" method="post">
                                 <div class="form-outline form-white mb-4">
                                     <input type="text" name="mail" class="form-control form-control-lg"/>
                                     <label class="form-label">Email</label>
@@ -41,25 +41,25 @@
                                 </div>
                             </form>
 
-                            <form action="/MailtoServLet.do" method="post">
-                                <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Te has olvidado tu
+                            <form action="MailtoServLet.do" method="post">
+                                <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="jsp/recover.jsp">Te has olvidado tu
                                     password?</a></p>
                             </form>
 
-                            <form action="/HomeServLet.do" method="post">
+                            <form action="HomeServLet.do" method="post">
                                 <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
                             </form>
 
                             <div class="d-flex justify-content-center text-center mt-4 pt-1">
-                                <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
-                                <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
-                                <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
+                                <a href="http://www.facebook.com" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+                                <a href="http://www.twitter.com" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
+                                <a href="http://www.google.com" class="text-white"><i class="fab fa-google fa-lg"></i></a>
                             </div>
                         </div>
 
                         <div>
                             <p class="mb-0"> No eres usuario registrado?</p>
-                            <form action="/RegistroServLet.do" method="get">
+                            <form action="RegistroServLet.do" method="get">
                                 <button class="btn btn-outline-light btn-lg px-5" type="submit">Registrate!</button>
                             </form>
                         </div>

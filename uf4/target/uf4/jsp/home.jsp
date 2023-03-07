@@ -32,38 +32,27 @@
                             <h2 class="fw-bold mb-2 text-uppercase">Home</h2>
 
                             <%for (Post p : postArrayList) { %>
-                                <form action="/HomeServLet.do" method="post">
-                                    <div class="form-outline form-white mb-4">
-                                        <input type="text" name="name" class="form-control form-control-lg"/>
-                                        <label class="form-label">Usuario: <%=p.getUsuario()%> </label>
-                                    </div>
+                            <form action="HomeServLet.do" method="post">
+                                <input hidden class="form-control" type="text" name="id" value="<%=p.getId()%>">
 
-                                    <div class="form-outline form-white mb-4">
-                                        <input type="text" name="titulo" <%=p.getTitulo()%> class="form-control form-control-lg"/>
-                                        <label class="form-label">Titulo: <%=p.getTitulo()%> </label>
-                                    </div>
+                                <div class="form-outline form-white mb-4">
+                                    <label class="form-label" name="usuario"> Usuario: <%=p.getUsuario()%> </label>
 
-                                    <div class="form-outline form-white mb-4">
-                                        <input type="text" name="url" class="form-control form-control-lg"/>
-                                        <label class="form-label">Url: <%=p.getUrl()%> </label>
-                                    </div>
+                                    <label class="form-label" name="titulo"> Titulo: <%=p.getTitulo()%> </label>
 
-                                    <div class="form-outline form-white mb-4">
-                                        <input type="textarea" name="msg" class="form-control form-control-lg"/>
-                                        <label class="form-label">Mensaje: <%=p.getMessage()%> </label>
-                                    </div>
+                                    <label class="form-label" name="url"> Url: <%=p.getUrl()%> </label>
 
-                                    <div class="form-outline form-white mb-4">
-                                        <input type="text" name="date" class="form-control form-control-lg"/>
-                                        <label class="form-label">Fecha: <%=p.getDate()%> </label>
-                                    </div>
-                                </form>
+                                    <label type="textarea" name="msg" class="form-control form-control-lg"> Mensaje: <%=p.getMessage()%> </label>
+
+                                    <label class="form-label" name="date"> Fecha: <%=p.getDate()%> </label>
+                                </div>
+                            </form>
                             <%}%>
 
                         </div>
 
                         <div>
-                            <form action="/PostUserServLet.do" method="post">
+                            <form action="PostUserServLet.do" method="post">
                                 <button class="btn btn-outline-light btn-lg px-5" type="submit">Mis posts</button>
                             </form>
                         </div>

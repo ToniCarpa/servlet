@@ -29,15 +29,27 @@ public class PostService {
     }
 
 
-    public boolean checkUser(String pass, String mail) throws SQLException {
+    public Usuario checkUser(String pass, String mail) throws SQLException {
         ArrayList<Usuario> listUsuarios = dao.allUsuariosList();
-        boolean status = false;
-
+        Usuario u = null;
         for (Usuario o : listUsuarios) {
             if (o.getEmail().equals(mail) && (o.getPassword().equals(pass))) {
-                status = true;
+                u = o;
             } else {
                 System.out.println("Usuario no encontrado, registrate");
+            }
+        }
+        return u;
+    }
+
+
+    public boolean ExistUser(Usuario u) throws SQLException {
+        ArrayList<Usuario> usuarioArrayList = dao.allUsuariosList();
+        boolean status = false;
+        for (Usuario x : usuarioArrayList) {
+            if (x.getId().equals(x.getId())) {
+                status = true;
+            } else {
                 status = false;
             }
         }
@@ -45,7 +57,7 @@ public class PostService {
     }
 
     public Usuario newUser(String name, String pass, String mail, String link, String git) throws SQLException {
-    Usuario t = null;
+        Usuario t = null;
         ArrayList<Usuario> usuList = dao.allUsuariosList();
         for (Usuario u : usuList) {
             if (u.getName().equals(name)) {
@@ -62,7 +74,8 @@ public class PostService {
     public ArrayList<Post> postList() throws SQLException {
         return dao.allPostList();
     }
-    public ArrayList<Post> listPostUsusario(Usuario u) throws  SQLException {
+
+    public ArrayList<Post> listPostUsusario(Usuario u) throws SQLException {
         return dao.allPostUserList(u);
     }
 
@@ -70,7 +83,7 @@ public class PostService {
         return dao.allUsuariosList();
     }
 
-    public Usuario usuarioId(UUID id) throws SQLException{
+    public Usuario usuarioId(UUID id) throws SQLException {
         return dao.getUsuarioById(id);
     }
 
