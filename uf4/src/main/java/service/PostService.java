@@ -29,6 +29,7 @@ public class PostService {
     }
 
 
+    // PARAMETROS UNICOS
     public Usuario checkUser(String pass, String mail) throws SQLException {
         ArrayList<Usuario> listUsuarios = dao.allUsuariosList();
         Usuario u = null;

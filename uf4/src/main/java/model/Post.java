@@ -14,9 +14,11 @@ public class Post {
     private String message;
     private Object image;
     private Date date;
+    private int likes;
+    private static int idin = 0;
 
     public Post(int id, String usuario, String titulo, String url, String message, Date date) {
-        this.id = id;
+        this.id = idin++;
         this.usuario = usuario;
         this.titulo = titulo;
         this.url = url;
@@ -36,6 +38,14 @@ public class Post {
 
     public int getId() {
         return id;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
     }
 
     public void setId(int id) {
