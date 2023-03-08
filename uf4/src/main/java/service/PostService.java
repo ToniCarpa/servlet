@@ -23,9 +23,10 @@ public class PostService {
     }
 
     public static PostService getInstance() {
-        if (postService == null)
+        if (postService == null) {
             postService = new PostService();
-        return postService;
+        }
+            return postService;
     }
 
 

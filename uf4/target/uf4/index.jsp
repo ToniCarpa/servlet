@@ -46,7 +46,7 @@
                                     password?</a></p>
                             </form>
 
-                            <form action="/HomeServLet.do" method="post">
+                            <form action="home.do" method="post">
                                 <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
                             </form>
 

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 
-@WebServlet(name = "LoginServLet", urlPatterns = "/LoginServLet.do")
+@WebServlet(name = "index", urlPatterns = "/index.do")
 public class LoginServLet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
