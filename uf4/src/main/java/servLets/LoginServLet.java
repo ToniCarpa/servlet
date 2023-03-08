@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 
-@WebServlet(name = "LoginServLet", urlPatterns = "/LoginServLet.do")
+@WebServlet(name = "index", urlPatterns = "/index.do")
 public class LoginServLet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private PostService postService;
@@ -30,28 +30,19 @@ public class LoginServLet extends HttpServlet {
     //response.sendRedirect(request.getContextPath() + "/OtroServlet");
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher view = getServletContext().getRequestDispatcher("/index.jsp");
-        view.forward(request, response);
+        getServletContext().getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String password = request.getParameter("pass");
-        String email = request.getParameter("mail");
-        HttpSession repo = request.getSession();
 
         try {
-            Usuario u = postService.checkUser(email, password);
-            if (postService.ExistUser(u)) {
-                repo.setAttribute("usuario", u);
-                RequestDispatcher view = getServletContext().getRequestDispatcher("/jsp/home.jsp");
-                view.forward(request, response);
-            } else {
-                getServletContext().getRequestDispatcher("jsp/register.jsp").forward(request, response);
-
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Usuario u = postService.existUser(request);
         }
+
+
+        getServletContext().getRequestDispatcher("home.jsp").forward(request, response);
+        }
+        response.sendRedirect(request.getContextPath() + "/index");
     }
 }
 

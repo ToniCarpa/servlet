@@ -5,6 +5,7 @@ import dao.Jdbc;
 import model.Post;
 import model.Usuario;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -28,75 +29,50 @@ public class PostService {
         return postService;
     }
 
+    // --------------------------------------------------USUARIO-------------------------------------------------------
 
-    // PARAMETROS UNICOS
-    public Usuario checkUser(String pass, String mail) throws SQLException {
-        ArrayList<Usuario> listUsuarios = dao.allUsuariosList();
-        Usuario u = null;
-        for (Usuario o : listUsuarios) {
-            if (o.getEmail().equals(mail) && (o.getPassword().equals(pass))) {
-                u = o;
-            } else {
-                System.out.println("Usuario no encontrado, registrate");
-            }
+    public boolean loginUser(HttpServletRequest request) throws ClassNotFoundException {
+        try {
+            Usuario u = existUser(request);
+            return true;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Usuario existUser(HttpServletRequest request) throws ClassNotFoundException {
+        String password = request.getParameter("pass");
+        String email = request.getParameter("mail");
+try {
+        Usuario u = dao.getUsuarioByMailPass(password, email);
+        if (u == null) {
+            throw new SQLException();
         }
         return u;
-    }
+    } catch (SQLException e) {
+    throw new RuntimeException(e);
+} catch (ClassNotFoundException e) {
+    throw new RuntimeException(e);
+}
+
+        // --------------------------------------------------POSTS-------------------------------------------------------
 
 
-    public boolean ExistUser(Usuario u) throws SQLException {
-        ArrayList<Usuario> usuarioArrayList = dao.allUsuariosList();
-        boolean status = false;
-        for (Usuario x : usuarioArrayList) {
-            if (x.getId().equals(x.getId())) {
-                status = true;
-            } else {
-                status = false;
-            }
-        }
-        return status;
-    }
-
-    public Usuario newUser(String name, String pass, String mail, String link, String git) throws SQLException {
-        Usuario t = null;
-        ArrayList<Usuario> usuList = dao.allUsuariosList();
-        for (Usuario u : usuList) {
-            if (u.getName().equals(name)) {
-                System.out.println("Escoje otro nombre");
-            } else {
-                t = dao.insertUsuario(new Usuario(UUID.randomUUID(), name, pass, mail, link, git));
-                usuList.add(t); //new Usuario(UUID.randomUUID(), name, pass, mail, link, git));
-            }
-        }
-        return t;
-    }
+    // CREATE-DELETE
 
 
-    public ArrayList<Post> postList() throws SQLException {
+    // --------------------------------------------------LISTS-------------------------------------------------------
+
+    public ArrayList<Post> postList() throws SQLException, ClassNotFoundException {
         return dao.allPostList();
     }
 
-    public ArrayList<Post> listPostUsusario(Usuario u) throws SQLException {
+    public ArrayList<Post> listPostUsusario(Usuario u) throws SQLException, ClassNotFoundException {
         return dao.allPostUserList(u);
     }
 
-    public ArrayList<Usuario> usuariosList() throws SQLException {
+    public ArrayList<Usuario> usuariosList() throws SQLException, ClassNotFoundException {
         return dao.allUsuariosList();
-    }
-
-    public Usuario usuarioId(UUID id) throws SQLException {
-        return dao.getUsuarioById(id);
-    }
-
-
-    public ArrayList<Post> getPostsOrdered() throws SQLException {
-        ArrayList<Post> postList = dao.allPostList();
-        ArrayList<Post> postReturn = new ArrayList<Post>();
-        for (Post p : postList) {
-            //ORDENAR ARRAY date inverso
-            postReturn.add(p);
-        }
-        return postReturn;
     }
 
 }

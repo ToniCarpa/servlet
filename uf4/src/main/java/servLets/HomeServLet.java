@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-@WebServlet(name = "HomeServLet", urlPatterns = "/jsp/HomeServLet.do")
+@WebServlet(name = "home", urlPatterns = "/home.do")
 public class HomeServLet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -25,8 +25,8 @@ public class HomeServLet extends HttpServlet {
         postService = new PostService();
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher view = getServletContext().getRequestDispatcher("/jsp/home.jsp");
-        view.forward(request, response);
+        getServletContext().getRequestDispatcher("/jsp/home.jsp").forward(request, response);
+
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

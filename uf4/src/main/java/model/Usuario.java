@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class Usuario {
-    private UUID id;
+    private int id;
     private String name;
     private String password;
     private String email;
@@ -15,8 +15,8 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(UUID id, String name, String password, String email, String linkdin, String gitlab, ArrayList<Post> listPost) {
-        this.id = UUID.randomUUID();
+    public Usuario(int id, String name, String password, String email, String linkdin, String gitlab, ArrayList<Post> listPost) {
+        this.id = id;
         this.name = name;
         this.password = password;
         this.email = email;
@@ -25,7 +25,7 @@ public class Usuario {
         this.listUserPost = listPost;
     }
 
-    public Usuario(UUID id, String usuario, String password, String email, String linkdin, String gitlab) {
+    public Usuario(int id, String usuario, String password, String email, String linkdin, String gitlab) {
         this.id = id;
         this.name = usuario;
         this.password = password;
@@ -83,11 +83,11 @@ public class Usuario {
         return listUserPost;
     }
 
-    public UUID getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(int id) {
         this.id = id;
     }
 

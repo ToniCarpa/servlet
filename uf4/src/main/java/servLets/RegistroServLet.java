@@ -29,8 +29,7 @@ private PostService postService;
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         String name = req.getParameter("name");
         String pass = req.getParameter("pass");
         String email = req.getParameter("mail");
@@ -40,7 +39,7 @@ private PostService postService;
 
         try {
             repo.getAttributeNames();
-            Usuario u = postService.newUser(name, pass, email, linkdn, git);
+            Usuario u = postService.newUser(id, name, pass, email, linkdn, git);
             repo.setAttribute("usuario", u);
             resp.
             getServletContext().getRequestDispatcher("/jsp/home.jsp").forward(req, resp);
