@@ -22,10 +22,11 @@ public class EditPostServLet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (postService.loginUser(req)) {
+            //boton delete-> pOstDELETE
+            postService.deletePost(req);
+            //boton create-> postCREATE
             postService.createPost(req);
             getServletContext().getRequestDispatcher("jsp/cretePost.jsp").forward(req, resp);
-            //boton delete-> pOstDELETE
-            //boton create-> postCREATE
         }
         getServletContext().getRequestDispatcher("index.jsp").forward(req, resp);
     }

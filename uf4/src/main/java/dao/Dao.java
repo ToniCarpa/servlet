@@ -10,19 +10,11 @@ import java.util.Random;
 import java.util.UUID;
 
 public class Dao {
-    private static Jdbc jdbc;
+    private Jdbc jdbc;
 
-
-    public static Jdbc getInstance() throws SQLException {
-        if (jdbc == null) {
-            jdbc = new Jdbc();
-        }
-        return jdbc;
-    }
 
 
     // --------------------------------------------------USUARIO--------------------------------------------------------
-
 
     // INSERT USER
     public void insertUsuario(Usuario usuario) throws SQLException {
@@ -39,7 +31,7 @@ public class Dao {
     }
 
     // DELETE USER
-    public void deleteUsuario(Usuario usuario) throws SQLException {
+    public void deleteUsuario(Usuario usuario) throws SQLException { //PERFIL
         jdbc.conect();
         try (PreparedStatement ps = jdbc.conn.prepareStatement(Constants.SQL_DELETE_USER)) {
             ps.setInt(1, usuario.getId());
@@ -49,7 +41,7 @@ public class Dao {
     }
 
     // UPDATE USER
-    public void updateUsuario(Usuario usuario) throws SQLException {
+    public void updateUsuario(Usuario usuario) throws SQLException { //PERFIL
         jdbc.conect();
         try (PreparedStatement ps = jdbc.conn.prepareStatement(Constants.SQL_UPDATE_USER)) {
             ps.setString(1, usuario.getName());
@@ -63,7 +55,7 @@ public class Dao {
     }
 
     // SELECT USUER BY ID
-    public Usuario getUsuarioById(int id) throws SQLException {
+    public Usuario getUsuarioById(int id) throws SQLException { // ID HIDDEN
         jdbc.conect();
         Usuario u = null;
         try (PreparedStatement ps = jdbc.conn.prepareStatement(Constants.SQL_SELECT_USERBYID)) {
@@ -161,8 +153,8 @@ public class Dao {
         try (PreparedStatement pre = jdbc.conn.prepareStatement(Constants.SQL_SELECT_USER_POSTS)) {
             pre.setInt(1, id);
             try (ResultSet rs = pre.executeQuery()) {
-                while (rs.next()) {
-                    listUserAllPosts.add(new Post(rs.getInt("id"), rs.getString("usuario"), rs.getString("titulo"), rs.getString("url"), rs.getString("message"), rs.getDate("date")));
+                if (rs.next()) {
+                    listUserAllPosts.add(new Post(rs.getInt("id"), rs.getString("usuario"), rs.getString("titulo"), rs.getString("url"), rs.getString("message"), rs.getObject("image"), rs.getDate("date"), rs.getInt("likes")));
                 }
             }
         }
@@ -177,11 +169,16 @@ public class Dao {
         try (PreparedStatement pre = jdbc.conn.prepareStatement(Constants.SQL_SELECT_ALL_POSTS)) {
             try (ResultSet rs = pre.executeQuery()) {
                 while (rs.next()) {
-                    listAllPosts.add(new Post(rs.getInt("id"), rs.getString("usuario"), rs.getString("titulo"), rs.getString("url"), rs.getString("message"), rs.getDate("date")));
+                    listAllPosts.add(new Post(rs.getInt("id"), rs.getString("usuario"), rs.getString("titulo"), rs.getString("url"), rs.getString("message"),rs.getObject("image"), rs.getDate("date"), rs.getInt("likes")));
                 }
             }
         }
         jdbc.close();
         return listAllPosts;
     }
-}
+
+    public void likes(Post post){
+
+    }
+
+ }

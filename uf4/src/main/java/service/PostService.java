@@ -14,14 +14,10 @@ import java.util.UUID;
 
 public class PostService {
     private Dao dao;
-    private Jdbc jdbc;
     private static PostService postService;
-    private Usuario usuario;
-    private ArrayList<Post> ListaPosts;
 
     public PostService() {
         dao = new Dao();
-        jdbc = new Jdbc();
     }
 
     public static PostService getInstance() {
@@ -114,11 +110,12 @@ public class PostService {
         String tit = request.getParameter("titulo");
         String url = request.getParameter("url");
         String mens = request.getParameter("mensaje");
+        Object img = request.getParameter("image");
         Date data = Date.valueOf(request.getParameter("date"));
         int likes = Integer.parseInt(request.getParameter("likes"));
 
         try {
-            dao.creaPost(new Post(name, tit, url, mens, data, likes));
+            dao.creaPost(new Post(name, tit, url, mens, img, data, likes));
             respuesta.setAttribute("Post creado", respuesta);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -144,4 +141,22 @@ public class PostService {
         }
     }
 
+    public void sumLikes(HttpServletRequest request) {
+        try {
+            int id = (int) request.getSession().getAttribute("id");
+            int likes = Integer.parseInt(request.getParameter("likes"));
+            //int like = dao.likes;
+            int postID = Integer.parseInt(request.getParameter("postId"));
+
+            ArrayList<Post> postlist = dao.allPostUserList(id);
+            for(Post o :postlist){
+                if(o.getId()==postID){
+                    likes++;
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
+
