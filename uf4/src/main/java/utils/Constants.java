@@ -16,8 +16,6 @@ public class Constants {
             "INSERT INTO posts (titulo, date, message) VALUES (?, ?, ?);";
     public static final String SQL_DELETE_POST =
             "DELETE FROM posts WHERE id = ?;";
-    public static final String SQL_UPDATE_POST =
-            "UPDATE posts SET titulo = ?, date = ?, message = ? WHERE id = ?;";
     public static final String SQL_SELECT_POST =
             "SELECT titulo, date, message FROM posts WHERE id = ?;";
     public static final String SQL_SELECT_ALL_POSTS =
@@ -34,8 +32,10 @@ public class Constants {
             "UPDATE usuario SET name = ?, linkdin = ?, gitlab = ? WHERE id = ?;";
     public static final String SQL_SELECT_USERBYID =
             "SELECT * FROM usuario WHERE id=?;";
-    public static final String SQL_SELECT_PASSMAIL_BYUSER =
+    public static final String SQL_SELECT_USER_BYPASSMAIL =
             "SELECT password, email FROM usuario WHERE id = ?;";
+    public static final String SQL_SELECT_USER_BYNAME =
+            "SELECT password, email FROM usuario WHERE name = ?;";
     public static final String SQL_SELECT_ALLUSERS =
             "SELECT * FROM usuario;";
     public static final String SQL_SELECT_USER_POSTS =

@@ -1,3 +1,4 @@
+
 package servLets;
 
 import dao.Dao;
@@ -24,21 +25,16 @@ public class HomeServLet extends HttpServlet {
         super();
         postService = new PostService();
     }
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher view = getServletContext().getRequestDispatcher("/jsp/home.jsp");
-        view.forward(request, response);
-    }
+
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<Post> postList = null;
-        try {
-            postList = PostService.getInstance().getPostsOrdered();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        if (postService.loginUser(request)) {
+            postService.listPosts(request);
+            getServletContext().getRequestDispatcher("/jsp/home.jsp").forward(request, response);
+            //boton user -> postMISposts
+            //boton like -> postLikes
         }
-        request.setAttribute("posts", postList);
-        getServletContext().getRequestDispatcher("/jsp/home.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("index.jsp").forward(request, response);
     }
-
 
 }
