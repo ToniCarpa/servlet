@@ -106,7 +106,7 @@ public class PostService {
     public void createPost(HttpServletRequest request) {
         HttpSession respuesta = request.getSession(true);
 
-        String name = request.getParameter("usuario");
+         = request.getParameter("usuario_id");
         String tit = request.getParameter("titulo");
         String url = request.getParameter("url");
         String mens = request.getParameter("mensaje");

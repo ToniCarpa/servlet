@@ -125,7 +125,7 @@ public class Dao {
     public void creaPost(Post post) throws SQLException {
         jdbc.conect();
         try (PreparedStatement ps = jdbc.conn.prepareStatement(Constants.SQL_INSERT_POST)) {
-            ps.setString(1, post.getUsuario());
+            ps.setInt(1, post.getUsuario().getId());
             ps.setString(2, post.getTitulo());
             ps.setString(3, post.getUrl());
             ps.setString(4, post.getMessage());
@@ -154,7 +154,7 @@ public class Dao {
             pre.setInt(1, id);
             try (ResultSet rs = pre.executeQuery()) {
                 if (rs.next()) {
-                    listUserAllPosts.add(new Post(rs.getInt("id"), rs.getString("usuario"), rs.getString("titulo"), rs.getString("url"), rs.getString("message"), rs.getObject("image"), rs.getDate("date"), rs.getInt("likes")));
+                    listUserAllPosts.add(new Post(rs.getInt("id"), getUsuarioById(rs.getInt("id_usuari")), rs.getString("titulo"), rs.getString("url"), rs.getString("message"), rs.getObject("image"), rs.getDate("date"), rs.getInt("likes")));
                 }
             }
         }
@@ -169,7 +169,7 @@ public class Dao {
         try (PreparedStatement pre = jdbc.conn.prepareStatement(Constants.SQL_SELECT_ALL_POSTS)) {
             try (ResultSet rs = pre.executeQuery()) {
                 while (rs.next()) {
-                    listAllPosts.add(new Post(rs.getInt("id"), rs.getString("usuario"), rs.getString("titulo"), rs.getString("url"), rs.getString("message"),rs.getObject("image"), rs.getDate("date"), rs.getInt("likes")));
+                    listAllPosts.add(new Post(rs.getInt("id"), getUsuarioById(rs.getInt("id_usuari")), rs.getString("titulo"), rs.getString("url"), rs.getString("message"),rs.getObject("image"), rs.getDate("date"), rs.getInt("likes")));
                 }
             }
         }

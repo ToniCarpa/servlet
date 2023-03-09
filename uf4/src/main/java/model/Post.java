@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public class Post {
     private int id;
-    private String usuario;
+    private Usuario usuario;
     private String titulo;
     private String url;
     private String message;
@@ -17,7 +17,7 @@ public class Post {
     private int likes;
 
 
-    public Post(int id, String usuario, String titulo, String url, String message, Object image, Date date, int likes) {
+    public Post(int id, Usuario usuario, String titulo, String url, String message, Object image, Date date, int likes) {
         this.id = id;
         this.usuario = usuario;
         this.titulo = titulo;
@@ -28,7 +28,7 @@ public class Post {
         this.likes = likes;
     }
 
-    public Post(String usuario, String titulo, String url, String message, Object image, Date date, int likes) {
+    public Post(Usuario usuario, String titulo, String url, String message, Object image, Date date, int likes) {
         this.usuario = usuario;
         this.titulo = titulo;
         this.url = url;
@@ -54,11 +54,11 @@ public class Post {
         this.id = id;
     }
 
-    public String getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(String usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 

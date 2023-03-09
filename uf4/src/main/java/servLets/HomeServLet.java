@@ -17,10 +17,7 @@ import java.util.ArrayList;
 
 @WebServlet(name = "home", urlPatterns = "/home.do")
 public class HomeServLet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     private PostService postService;
-
     public HomeServLet() {
         super();
         postService = new PostService();
