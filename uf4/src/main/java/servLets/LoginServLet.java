@@ -27,13 +27,13 @@ public class LoginServLet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("index.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("login.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (postService.loginUser(request)) {
             getServletContext().getRequestDispatcher("jsp/home.jsp").forward(request, response);
         }
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("login.jsp");
     }
 }

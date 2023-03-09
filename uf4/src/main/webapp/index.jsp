@@ -1,74 +1,146 @@
+<%@ page import="model.Post" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <meta name="description" content="Blog M06"/>
-    <meta name="author" content="tcp.id"/>
-    <title>Blog TCP M06 UF4</title>
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
-    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet"
-          type="text/css"/>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
-          rel="stylesheet" type="text/css"/>
-    <link href="css/styles.css" rel="stylesheet"/>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>TCP BLOG</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
 
+        <%
+        ArrayList<Post> postArrayList = (ArrayList<Post>) request.getAttribute("listPostUsuario");
 
+        %>
 
-</head>
-<section class="vh-100 gradient-custom">
-    <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                <div class="card bg-dark text-white" style="border-radius: 1rem;">
-                    <div class="card-body p-5 text-center">
-
-                        <div class="mb-md-5 mt-md-4 pb-5">
-
-                            <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
-                            <p class="text-white-50 mb-5">Introduce tu email & password!</p>
-
-                            <form action="/LoginServLet.do" method="post">
-                                <div class="form-outline form-white mb-4">
-                                    <input type="text" name="mail" class="form-control form-control-lg"/>
-                                    <label class="form-label">Email</label>
-                                </div>
-
-                                <div class="form-outline form-white mb-4">
-                                    <input type="text" name="pass" class="form-control form-control-lg"/>
-                                    <label class="form-label">Password</label>
-                                </div>
-                            </form>
-
-                            <form action="/MailtoServLet.do" method="post">
-                                <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Te has olvidado tu
-                                    password?</a></p>
-                            </form>
-
-                            <form action="home.do" method="post">
-                                <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
-                            </form>
-
-                            <div class="d-flex justify-content-center text-center mt-4 pt-1">
-                                <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
-                                <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
-                                <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
-                            </div>
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="index.jsp">Start Bootstrap</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="jsp/login.jsp">Login</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="jsp/postUser.jsp">Mis Posts</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="jsp/home.jsp">Todos los Post</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1>WIAM Blog</h1>
+                            <span class="subheading">Un Blog hecho por Servlets & Jsp's </span>
                         </div>
-
-                        <div>
-                            <p class="mb-0"> No eres usuario registrado?</p>
-                            <form action="/RegistroServLet.do" method="get">
-                                <button class="btn btn-outline-light btn-lg px-5" type="submit">Registrate!</button>
-                            </form>
-                        </div>
-
                     </div>
                 </div>
             </div>
+        </header>
+        <!-- Main Content-->
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+
+                    <!-- Post preview-->
+                <%for (int i= 0; i<postArrayList.size(); i++) {%>
+                    <div class="post-preview">
+                        <a href="home.do">
+                            <h2 class="post-title"> <%=postArrayList.get(0).getTitulo()%> </h2>
+                            <h3 class="post-subtitle"> <%=postArrayList.get(0).getMessage()%> </h3>
+                        </a>
+                    </div>
+                    <!-- Divider-->
+                    <hr class="my-4" />
+                    <!-- Post preview-->
+                    <div class="post-preview">
+                        <a href="home.do">
+                            <h2 class="post-title"> <%=postArrayList.get(1).getTitulo()%> </h2>
+                            <h3 class="post-subtitle"> <%=postArrayList.get(1).getMessage()%> </h3>
+                        </a>
+                    </div>
+                    <!-- Divider-->
+                    <hr class="my-4" />
+                    <!-- Post preview-->
+                    <div class="post-preview">
+                        <a href="home.do">
+                            <h2 class="post-title"> <%=postArrayList.get(2).getTitulo()%> </h2>
+                            <h3 class="post-subtitle"> <%=postArrayList.get(2).getMessage()%> </h3>
+                        </a>
+                    </div>
+                    <!-- Divider-->
+                    <hr class="my-4" />
+                    <!-- Post preview-->
+                    <div class="post-preview">
+                        <a href="home.do">
+                            <h2 class="post-title"> <%=postArrayList.get(3).getTitulo()%> </h2>
+                            <h3 class="post-subtitle"> <%=postArrayList.get(3).getMessage()%> </h3>
+                        </a>
+                    </div>
+                    <%}%>
+                    <!-- Divider-->
+                    <hr class="my-4" />
+                    <!-- Pager-->
+                    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="home.do">Todos los Posts →</a></div>
+                </div>
+            </div>
         </div>
-    </div>
-</section>
-</body>
+        <!-- Footer-->
+        <footer class="border-top">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <ul class="list-inline text-center">
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="small text-center text-muted fst-italic">Copyright &copy; TCP 2023</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
 </html>

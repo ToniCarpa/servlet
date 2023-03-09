@@ -34,7 +34,7 @@ public class HomeServLet extends HttpServlet {
             //boton user -> postMISposts
             //boton like -> postLikes
         }
-        getServletContext().getRequestDispatcher("index.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("login.jsp").forward(request, response);
     }
 
 }

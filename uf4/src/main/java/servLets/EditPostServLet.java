@@ -28,7 +28,7 @@ public class EditPostServLet extends HttpServlet {
             postService.createPost(req);
             getServletContext().getRequestDispatcher("jsp/cretePost.jsp").forward(req, resp);
         }
-        getServletContext().getRequestDispatcher("index.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("login.jsp").forward(req, resp);
     }
 
 

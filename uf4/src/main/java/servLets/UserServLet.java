@@ -26,6 +26,6 @@ public class UserServLet extends HttpServlet {
             //boton edit -> editServer
 
         }
-        getServletContext().getRequestDispatcher("index.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("login.jsp").forward(req, resp);
     }
 }
