@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 
-@WebServlet(name = "index", urlPatterns = "/index.do")
+@WebServlet(name = "login", urlPatterns = "/login.do")
 public class LoginServLet extends HttpServlet {
     private PostService postService;
 
