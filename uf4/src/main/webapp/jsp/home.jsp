@@ -32,7 +32,7 @@
                             <h2 class="fw-bold mb-2 text-uppercase">Home</h2>
 
                         <%for (Post p : postArrayList) { %>
-                            <form action="HomeServLet.do" method="post">
+                            <form action="home.do" method="post">
                                 <input hidden class="form-control" type="text" name="id" value="<%=p.getId()%>">
 
                                 <div class="form-outline form-white mb-4">

@@ -19,7 +19,6 @@ import java.util.UUID;
 
 @WebServlet(name = "index", urlPatterns = "/index.do")
 public class LoginServLet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
     private PostService postService;
 
     public LoginServLet() {
@@ -27,22 +26,15 @@ public class LoginServLet extends HttpServlet {
         this.postService = new PostService();
     }
 
-    //response.sendRedirect(request.getContextPath() + "/OtroServlet");
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         getServletContext().getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        try {
-            Usuario u = postService.existUser(request);
+        if (postService.loginUser(request)) {
+            getServletContext().getRequestDispatcher("jsp/home.jsp").forward(request, response);
         }
-
-
-        getServletContext().getRequestDispatcher("home.jsp").forward(request, response);
-        }
-        response.sendRedirect(request.getContextPath() + "/index");
+        response.sendRedirect("index.jsp");
     }
 }
 

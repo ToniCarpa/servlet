@@ -25,7 +25,7 @@ public class Dao {
 
 
     // INSERT USER
-    public void insertUsuario(Usuario usuario) throws SQLException, ClassNotFoundException {
+    public void insertUsuario(Usuario usuario) throws SQLException {
         jdbc.conect();
         try (PreparedStatement ps = jdbc.conn.prepareStatement(Constants.SQL_INSERT_USER)) {
             ps.setString(1, usuario.getName());
@@ -39,7 +39,7 @@ public class Dao {
     }
 
     // DELETE USER
-    public void deleteUsuario(Usuario usuario) throws SQLException, ClassNotFoundException {
+    public void deleteUsuario(Usuario usuario) throws SQLException {
         jdbc.conect();
         try (PreparedStatement ps = jdbc.conn.prepareStatement(Constants.SQL_DELETE_USER)) {
             ps.setInt(1, usuario.getId());
@@ -49,7 +49,7 @@ public class Dao {
     }
 
     // UPDATE USER
-    public void updateUsuario(Usuario usuario) throws SQLException, ClassNotFoundException {
+    public void updateUsuario(Usuario usuario) throws SQLException {
         jdbc.conect();
         try (PreparedStatement ps = jdbc.conn.prepareStatement(Constants.SQL_UPDATE_USER)) {
             ps.setString(1, usuario.getName());
@@ -60,11 +60,10 @@ public class Dao {
             ps.execute();
         }
         jdbc.close();
-
     }
 
     // SELECT USUER BY ID
-    public Usuario getUsuarioById(int id) throws SQLException, ClassNotFoundException {
+    public Usuario getUsuarioById(int id) throws SQLException {
         jdbc.conect();
         Usuario u = null;
         try (PreparedStatement ps = jdbc.conn.prepareStatement(Constants.SQL_SELECT_USERBYID)) {
@@ -79,11 +78,26 @@ public class Dao {
         return u;
     }
 
+    public Usuario getUserByName(String name) throws SQLException {
+        jdbc.conect();
+        Usuario u = null;
+        try (PreparedStatement ps = jdbc.conn.prepareStatement(Constants.SQL_SELECT_USER_BYNAME)) {
+            ps.setString(1, name);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    u = new Usuario(rs.getInt("id"), rs.getString("name"), rs.getString("password"), rs.getString("email"), rs.getString("linkdin"), rs.getString("gitlad"));
+                }
+            }
+        }
+        jdbc.close();
+        return u;
+    }
+
     // SELECT USUER BY MAIL & PASWD
-    public Usuario getUsuarioByMailPass(String mail, String pass) throws SQLException, ClassNotFoundException {
+    public Usuario getUsuarioByMailPass(String mail, String pass) throws SQLException {
         Usuario u = null;
         jdbc.conect();
-        try (PreparedStatement ps = jdbc.conn.prepareStatement(Constants.SQL_SELECT_USERBYID)) {
+        try (PreparedStatement ps = jdbc.conn.prepareStatement(Constants.SQL_SELECT_USER_BYPASSMAIL)) {
             ps.setString(1, mail);
             ps.setString(2, pass);
             try (ResultSet rs = ps.executeQuery()) {
@@ -97,7 +111,7 @@ public class Dao {
     }
 
     // SELECT ALLUSERS
-    public ArrayList<Usuario> allUsuariosList() throws SQLException, ClassNotFoundException {
+    public ArrayList<Usuario> allUsuariosList() throws SQLException {
         ArrayList<Usuario> listUsuarios = new ArrayList<>();
         Usuario u = null;
         jdbc.conect();
@@ -113,11 +127,10 @@ public class Dao {
     }
 
 
-
     // --------------------------------------------------POSTS----------------------------------------------------------
 
     // CREATE/INSERT POST
-    public void creaPost(Post post) throws SQLException, ClassNotFoundException {
+    public void creaPost(Post post) throws SQLException {
         jdbc.conect();
         try (PreparedStatement ps = jdbc.conn.prepareStatement(Constants.SQL_INSERT_POST)) {
             ps.setString(1, post.getUsuario());
@@ -132,21 +145,21 @@ public class Dao {
     }
 
     // DELETE POST
-    public void deletePost(Post post) throws SQLException, ClassNotFoundException {
+    public void deletePost(int id) throws SQLException {
         jdbc.conect();
         try (PreparedStatement ps = jdbc.conn.prepareStatement(Constants.SQL_DELETE_POST)) {
-            ps.setString(1, String.valueOf(post.getId()));
+            ps.setInt(1, id);
             ps.execute();
         }
         jdbc.close();
     }
 
     // SELECT ALLPOST USER
-    public ArrayList<Post> allPostUserList(Usuario u) throws SQLException, ClassNotFoundException {
+    public ArrayList<Post> allPostUserList(int id) throws SQLException {
         jdbc.conect();
         ArrayList<Post> listUserAllPosts = new ArrayList<>();
         try (PreparedStatement pre = jdbc.conn.prepareStatement(Constants.SQL_SELECT_USER_POSTS)) {
-            pre.setString(1, String.valueOf(u.getId()));
+            pre.setInt(1, id);
             try (ResultSet rs = pre.executeQuery()) {
                 while (rs.next()) {
                     listUserAllPosts.add(new Post(rs.getInt("id"), rs.getString("usuario"), rs.getString("titulo"), rs.getString("url"), rs.getString("message"), rs.getDate("date")));
@@ -158,7 +171,7 @@ public class Dao {
     }
 
     // SELECT ALL POSTS
-    public ArrayList<Post> allPostList() throws SQLException, ClassNotFoundException {
+    public ArrayList<Post> allPostList() throws SQLException {
         jdbc.conect();
         ArrayList<Post> listAllPosts = new ArrayList<>();
         try (PreparedStatement pre = jdbc.conn.prepareStatement(Constants.SQL_SELECT_ALL_POSTS)) {
@@ -171,6 +184,7 @@ public class Dao {
         jdbc.close();
         return listAllPosts;
     }
-
-
 }
+
+
+

@@ -1,4 +1,4 @@
-<%--
+<%@ page import="model.Usuario" %><%--
   Created by IntelliJ IDEA.
   User: a201691ac
   Date: 3/7/23
@@ -21,7 +21,9 @@
           rel="stylesheet" type="text/css"/>
     <link href="css/styles.css" rel="stylesheet"/>
 
-
+    <%
+       Usuario u = (Usuario) request.getAttributeNames();
+    %>
 
 </head>
 <section class="vh-100 gradient-custom">

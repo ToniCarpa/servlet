@@ -8,9 +8,13 @@ import java.sql.SQLException;
 
 public class Jdbc {
     protected Connection conn;
-    public void conect() throws SQLException, ClassNotFoundException {
+    public void conect() throws SQLException {
 
-        Class.forName(Constants.DB_DRIVER_CONNECTION);
+        try {
+            Class.forName(Constants.DB_DRIVER_CONNECTION);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         conn = DriverManager.getConnection(Constants.DB_URL_CONNECTION, Constants.DB_USER_CONNECTION, Constants.DB_PASS_CONNECTION);
         System.out.println("Todo OK");
 

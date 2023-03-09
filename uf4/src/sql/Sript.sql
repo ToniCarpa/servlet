@@ -26,4 +26,4 @@ CREATE TABLE `usuario` (
   UNIQUE KEY `usuari` (`usuari`)
 );
 
-insert into usuario values (1,'nomPrueba', 'tituloPrueba','http://google.com','Esto es una prueba','null');
+insert into usuario values ('00000','ana', 'ana','ana','Esto es una prueba','null');

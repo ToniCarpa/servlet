@@ -1,5 +1,5 @@
-Tue Mar 07 15:10:36 UTC 2023 Thread[RMI TCP Connection(2)-127.0.0.1,5,RMI Runtime] Cleanup action starting
-java.sql.SQLException: Database '/home/users/inf/wiam2/a201691ac/IdeaProjects/servlet/uf4/src/sql/Sript.sql' not found.
+Wed Mar 08 19:25:13 UTC 2023 Thread[RMI TCP Connection(2)-127.0.0.1,5,RMI Runtime] Cleanup action starting
+java.sql.SQLException: Database '/home/tcp/IdeaProjects/m06/uf4/src/sql/Sript.sql' not found.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(SQLExceptionFactory.java:115)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(SQLExceptionFactory.java:141)
 	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Util.java:225)
@@ -33,13 +33,13 @@ java.sql.SQLException: Database '/home/users/inf/wiam2/a201691ac/IdeaProjects/se
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
 	at java.base/java.lang.Thread.run(Thread.java:833)
-Caused by: ERROR XJ004: Database '/home/users/inf/wiam2/a201691ac/IdeaProjects/servlet/uf4/src/sql/Sript.sql' not found.
+Caused by: ERROR XJ004: Database '/home/tcp/IdeaProjects/m06/uf4/src/sql/Sript.sql' not found.
 	at org.apache.derby.shared.common.error.StandardException.newException(StandardException.java:300)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.wrapArgsForTransportAcrossDRDA(SQLExceptionFactory.java:170)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(SQLExceptionFactory.java:75)
 	... 32 more
 ============= begin nested exception, level (1) ===========
-ERROR XJ004: Database '/home/users/inf/wiam2/a201691ac/IdeaProjects/servlet/uf4/src/sql/Sript.sql' not found.
+ERROR XJ004: Database '/home/tcp/IdeaProjects/m06/uf4/src/sql/Sript.sql' not found.
 	at org.apache.derby.shared.common.error.StandardException.newException(StandardException.java:300)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.wrapArgsForTransportAcrossDRDA(SQLExceptionFactory.java:170)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(SQLExceptionFactory.java:75)

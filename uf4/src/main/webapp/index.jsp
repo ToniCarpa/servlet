@@ -41,10 +41,6 @@
                                 </div>
                             </form>
 
-                            <form action="mail.do" method="post">
-                                <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="jsp/recover.jsp">Te has olvidado tu
-                                    password?</a></p>
-                            </form>
 
                             <form action="home.do" method="post">
                                 <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
@@ -58,7 +54,6 @@
                         </div>
 
                         <div>
-                            <p class="mb-0"> No eres usuario registrado?</p>
                             <form action="register.do" method="get">
                                 <button class="btn btn-outline-light btn-lg px-5" type="submit">Registrate!</button>
                             </form>

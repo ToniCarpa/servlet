@@ -15,6 +15,14 @@ public class Usuario {
     public Usuario() {
     }
 
+    public Usuario(String name, String password, String email, String linkdin, String gitlab) {
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.linkdin = linkdin;
+        this.gitlab = gitlab;
+    }
+
     public Usuario(int id, String name, String password, String email, String linkdin, String gitlab, ArrayList<Post> listPost) {
         this.id = id;
         this.name = name;
