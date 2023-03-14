@@ -27,6 +27,7 @@ public class Dao {
             ps.setString(5, usuario.getGitlab());
             ps.execute();
         }
+        jdbc.conn.commit();
         jdbc.close();
     }
 
@@ -37,6 +38,7 @@ public class Dao {
             ps.setInt(1, usuario.getId());
             ps.execute();
         }
+        jdbc.conn.commit();
         jdbc.close();
     }
 
@@ -51,6 +53,7 @@ public class Dao {
             ps.setString(5, usuario.getGitlab());
             ps.execute();
         }
+        jdbc.conn.commit();
         jdbc.close();
     }
 
@@ -124,15 +127,19 @@ public class Dao {
     // CREATE/INSERT POST
     public void creaPost(Post post) throws SQLException {
         jdbc.conect();
+
         try (PreparedStatement ps = jdbc.conn.prepareStatement(Constants.SQL_INSERT_POST)) {
             ps.setInt(1, post.getUsuario().getId());
             ps.setString(2, post.getTitulo());
             ps.setString(3, post.getUrl());
             ps.setString(4, post.getMessage());
-            ps.setDate(5, (Date) post.getDate());
-            ps.setInt(5, post.getLikes());
+            ps.setBytes(5, (byte[]) post.getImage());
+            ps.setInt(6, post.getLikes());
+            ps.setDate(7, (Date) post.getDate());
+
             ps.execute();
         }
+        jdbc.conn.commit();
         jdbc.close();
     }
 
@@ -143,11 +150,12 @@ public class Dao {
             ps.setInt(1, id);
             ps.execute();
         }
+        jdbc.conn.commit();
         jdbc.close();
     }
 
     // SELECT ALLPOST USER
-    public ArrayList<Post> allPostUserList(int id) throws SQLException {
+    public ArrayList<Post> listUserPost(int id) throws SQLException {
         jdbc.conect();
         ArrayList<Post> listUserAllPosts = new ArrayList<>();
         try (PreparedStatement pre = jdbc.conn.prepareStatement(Constants.SQL_SELECT_USER_POSTS)) {

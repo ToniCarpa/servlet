@@ -15,53 +15,99 @@
     <link href="../css/styles.css" rel="stylesheet"/>
 
 
-
 </head>
-<section class="vh-100 gradient-custom">
-    <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                <div class="card bg-dark text-white" style="border-radius: 1rem;">
-                    <div class="card-body p-5 text-center">
-                        <div class="mb-md-5 mt-md-4 pb-5">
-                            <h2 class="fw-bold mb-2 text-uppercase">Sign In</h2>
-                            <p class="text-white-50 mb-5">Rellena los campos i Entra en la comunidad</p>
-
-                            <form action="register.do" method="post">
-                                <div class="form-outline form-white mb-4">
-                                    <input type="text" name="name" class="form-control form-control-lg"/>
-                                    <label class="form-label">Nombre de Usuario</label>
-                                </div>
-                                <div class="form-outline form-white mb-4">
-                                    <input type="text" name="pass" class="form-control form-control-lg"/>
-                                    <label class="form-label">Password</label>
-                                </div>
-                                <div class="form-outline form-white mb-4">
-                                    <input type="text" name="mail" class="form-control form-control-lg"/>
-                                    <label class="form-label">Email</label>
-                                </div>
-                                <div class="form-outline form-white mb-4">
-                                    <input type="text" name="link" class="form-control form-control-lg"/>
-                                    <label class="form-label">Cuenta Linkdin</label>
-                                </div>
-                                <div class="form-outline form-white mb-4">
-                                    <input type="text" name="git" class="form-control form-control-lg"/>
-                                    <label class="form-label">Cuenta Git</label>
-                                </div>
-
-                                <button class="btn btn-outline-light btn-lg px-5" type="submit">Enviar Registro</button>
-                            </form>
-
-                            <div class="d-flex justify-content-center text-center mt-4 pt-1">
-                                <a href="http://www.gitlab.com" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
-                                <a href="http://www.linkdin.com" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
-                            </div>
-                        </div>
-                    </div>
+<body>
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="../index.jsp">M06 UF4</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../index.jsp">Home</a></li>
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="login.jsp">Log In</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<header class="masthead" style="background-image: url('../assets/img/about-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Sign In</h1>
+                    <span class="subheading">Rellena los campos i Entra en la comunidad</span>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</header>
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+
+            <form action="register.do" method="post">
+                <div class="form-outline form-white mb-4">
+                    <input type="text" name="name" class="form-control form-control-lg"/>
+                    <label class="form-label">Nombre de Usuario</label>
+                </div>
+                <div class="form-outline form-white mb-4">
+                    <input type="text" name="pass" class="form-control form-control-lg"/>
+                    <label class="form-label">Password</label>
+                </div>
+                <div class="form-outline form-white mb-4">
+                    <input type="text" name="mail" class="form-control form-control-lg"/>
+                    <label class="form-label">Email</label>
+                </div>
+                <div class="form-outline form-white mb-4">
+                    <input type="text" name="link" class="form-control form-control-lg"/>
+                    <label class="form-label">Cuenta Linkdin</label>
+                </div>
+                <div class="form-outline form-white mb-4">
+                    <input type="text" name="git" class="form-control form-control-lg"/>
+                    <label class="form-label">Cuenta Git</label>
+                </div>
+                <div class="container position-relative px-4 px-lg-5">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                <button class="nav-link px-lg-3 py-3 py-lg-4" type="submit">Enviar Registro</button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="d-flex justify-content-center text-center mt-4 pt-1">
+                <a href="http://www.gitlab.com" class="text-white"><i class="fab fa-github-f fa-lg"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer-->
+<footer class="border-top">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <ul class="list-inline text-center">
+                    <li class="list-inline-item">
+                        <a href="git@github.com:ToniCarpa/servlet.git">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="small text-center text-muted fst-italic">Copyright &copy; TCP 2023</div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="../js/scripts.js"></script>
 </body>
 </html>

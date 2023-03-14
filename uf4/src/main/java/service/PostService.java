@@ -5,8 +5,13 @@ import dao.Jdbc;
 import model.Post;
 import model.Usuario;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -50,8 +55,19 @@ public class PostService {
         return u;
 
     }
+    public Boolean log(String mail, String pass) {
+        try {
+            Usuario u = dao.getUsuarioByMailPass(mail, pass);
+            if (u == null) {
+                throw new SQLException();
+            }
+            return true;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-    // --------------------------------------------------REGSITER-------------------------------------------------------
+        // --------------------------------------------------REGSITER-------------------------------------------------------
     public Usuario newUser(HttpServletRequest request) throws SQLException {
         HttpSession respuesta = request.getSession(true);
 
@@ -72,8 +88,8 @@ public class PostService {
     }
 
     public boolean createUser(HttpServletRequest request) {
-        HttpSession respuesta = request.getSession(true);
         try {
+            HttpSession respuesta = request.getSession(true);
             Usuario u = newUser(request);
             dao.insertUsuario(u);
             respuesta.setAttribute("Bienvenido" + u.getName(), respuesta);
@@ -86,17 +102,32 @@ public class PostService {
     // --------------------------------------------------HOME-------------------------------------------------------
     public ArrayList<Post> listPosts(HttpServletRequest request) {
         try {
+            HttpSession ses = request.getSession(true);
+            ArrayList<Post>listPost = dao.allPostList();
+            ses.setAttribute("listPost", listPost);
+            return listPost;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<Post> listPostsNew(int id ) {
+        try {
             return dao.allPostList();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
+
     public ArrayList<Post> listUserPost(HttpServletRequest request) {
-        int id = Integer.parseInt(request.getParameter("id"));
-        request.getSession().setAttribute("id", id);
         try {
-            return dao.allPostUserList(id);
+            HttpSession ses = request.getSession(true);
+            int id = (int) ses.getAttribute("id");
+
+            ArrayList<Post>listUserPost = dao.listUserPost(id);
+            ses.setAttribute("listUserPost", listUserPost);
+            return listUserPost;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -105,8 +136,9 @@ public class PostService {
     // --------------------------------------------------POSTS-------------------------------------------------------
     public void createPost(HttpServletRequest request) {
         HttpSession respuesta = request.getSession(true);
+        int id = (int) request.getSession().getAttribute("id");
 
-         = request.getParameter("usuario_id");
+        int idPost = Integer.parseInt(request.getParameter("idPost"));
         String tit = request.getParameter("titulo");
         String url = request.getParameter("url");
         String mens = request.getParameter("mensaje");
@@ -115,7 +147,7 @@ public class PostService {
         int likes = Integer.parseInt(request.getParameter("likes"));
 
         try {
-            dao.creaPost(new Post(name, tit, url, mens, img, data, likes));
+            dao.creaPost(new Post(idPost,dao.getUsuarioById(id), tit, url, mens, img, data, likes));
             respuesta.setAttribute("Post creado", respuesta);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -124,14 +156,15 @@ public class PostService {
 
     public void deletePost(HttpServletRequest request) {
         HttpSession respuesta = request.getSession(true);
+
         try {
             int idPost = Integer.parseInt(request.getParameter("idPost"));
             int id = (int) request.getSession().getAttribute("id");
             request.getSession().setAttribute("id", id);
-            ArrayList<Post> postUserList = dao.allPostUserList(id);
+            ArrayList<Post> postUserList = dao.listUserPost(id);
 
             for (Post p : postUserList) {
-                if (p.getId() == idPost) {
+                if (dao.getUsuarioById(id) == p.getUsuario()) {
                     dao.deletePost(idPost);
                     respuesta.setAttribute("Post Borrado", respuesta);
                 }
@@ -148,7 +181,7 @@ public class PostService {
             //int like = dao.likes;
             int postID = Integer.parseInt(request.getParameter("postId"));
 
-            ArrayList<Post> postlist = dao.allPostUserList(id);
+            ArrayList<Post> postlist = dao.allPostList();
             for(Post o :postlist){
                 if(o.getId()==postID){
                     likes++;
@@ -157,6 +190,18 @@ public class PostService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+    public byte[] imgByte (HttpServletRequest req) throws ServletException, IOException {
+        Part filePart = req.getPart("image");
+        InputStream inputStream = filePart.getInputStream();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        byte[] buffer = new byte[4096];
+        int bytesRead = -1;
+        while ((bytesRead = inputStream.read(buffer)) != -1) {
+            outputStream.write(buffer, 0, bytesRead);
+        }
+        byte[] imageBytes = outputStream.toByteArray();
+        return imageBytes;
     }
 }
 
