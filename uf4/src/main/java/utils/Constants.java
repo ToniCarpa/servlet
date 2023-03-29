@@ -40,5 +40,7 @@ public class Constants {
             "SELECT * FROM usuario;";
     public static final String SQL_SELECT_USER_POSTS =
             "SELECT posts FROM usuario WHERE id = ?;";
+    public static final String INSERT_LIKE =
+            "UPDATE post SET likes =? WHERE id =?;";
 
 }
